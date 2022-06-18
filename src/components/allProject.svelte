@@ -1,11 +1,11 @@
-<script lang="typescript">
+<script lang="ts">
 	import { onMount } from 'svelte';
 
 	import '../assets/css/allProject.css';
 	import ProjectCard from './projectCard.svelte';
 
-	let projects: any[] = [];
-	let showAll: boolean = false;
+	let projects: [] = [];
+	let showAll = false;
 
 	onMount(async () => {
 		await fetch('https://raw.githubusercontent.com/sohan-fahad/fakeDB/main/projectDB')
