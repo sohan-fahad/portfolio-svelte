@@ -1,8 +1,23 @@
-<script>
+<script lang="ts">
+	import { inview } from 'svelte-inview';
+	import type { ObserverEventDetails, ScrollDirection, Options } from 'svelte-inview';
+	let isInView: boolean;
+	let scrollDirection: any;
+	const options: Options = {
+		rootMargin: '-20px',
+		unobserveOnEnter: true
+	};
+
+	const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => {
+		isInView = detail.inView;
+		scrollDirection = detail.scrollDirection.vertical;
+		console.log(isInView);
+	};
 </script>
 
-<div class="left-side-wrapper">
-	<ul class="social_icon_wrapper">
+<div class="left-side-wrapper" use:inview={options} on:change={handleChange}>
+	<!-- {#if isInView} -->
+	<ul class:social_icon_wrapper={scrollDirection === 'down'}>
 		<li>
 			<a href="https://github.com/bchiang7" aria-label="GitHub" target="_blank" rel="noreferrer"
 				><svg
@@ -104,6 +119,7 @@
 			</a>
 		</li>
 	</ul>
+	<!-- {/if} -->
 </div>
 
 <style>
@@ -125,6 +141,7 @@
 		margin: 0px;
 		padding: 0px;
 		list-style: none;
+		animation: fadedown-enter 1.2s forwards ease-out;
 	}
 
 	.social_icon_wrapper a {
@@ -154,6 +171,16 @@
 		height: 90px;
 		margin: 0px auto;
 		background-color: var(--light-slate);
+	}
+
+	@keyframes fadedown-enter {
+		from {
+			transform: translateX(-200px);
+		}
+
+		to {
+			transform: translateX(0);
+		}
 	}
 
 	@media screen and (max-width: 1080px) {

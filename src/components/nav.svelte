@@ -1,5 +1,7 @@
 <script lang="ts">
 	import '../assets/css/nav.css';
+	import { inview } from 'svelte-inview';
+	import type { ObserverEventDetails, ScrollDirection, Options } from 'svelte-inview';
 
 	export let active: boolean;
 	let scrollValue: number = 0;
@@ -9,9 +11,19 @@
 		prevScrollValue = scrollValue;
 	}
 
-	console.log(active);
-
 	export let handlActive: any;
+
+	let isInViewNav: boolean;
+	let scrollDirection: ScrollDirection;
+	let options: Options = {
+		rootMargin: '-20px',
+		unobserveOnEnter: true
+	};
+
+	const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => {
+		isInViewNav = detail.inView;
+		scrollDirection = detail.scrollDirection;
+	};
 </script>
 
 <svelte:window bind:scrollY={scrollValue} />
@@ -22,6 +34,8 @@
 		: scrollValue < prevScrollValue
 		? 'navbar_scroll_top'
 		: 'navbar_scroll_down'}
+	use:inview={options}
+	on:change={handleChange}
 >
 	<nav class="navbar_wrapper">
 		<div class="navbar_logo" tabindex="-1">
@@ -47,27 +61,55 @@
 				>
 			</a>
 		</div>
-		<div class="navbar_menu_wr">
-			<ol>
-				<li class="fadedown-enter-done" style="transition-delay: 0ms;">
-					<a href="/#about">About</a>
-				</li>
-				<li class="fadedown-enter-done" style="transition-delay: 100ms;">
-					<a href="/#jobs">Experience</a>
-				</li>
-				<li class="fadedown-enter-done" style="transition-delay: 200ms;">
-					<a href="/#projects">Work</a>
-				</li>
-				<li class="fadedown-enter-done" style="transition-delay: 300ms;">
-					<a href="/#contact">Contact</a>
-				</li>
-			</ol>
-			<div class="nevbar_resume_wrpper">
-				<a class="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer"
-					>Resume</a
+		{#if isInViewNav && scrollDirection.vertical === 'down'}
+			<div class="navbar_menu_wr">
+				<ol>
+					<li
+						class={scrollDirection.vertical === 'down'
+							? 'fade-enter-done-top'
+							: 'fade-enter-proccess'}
+						style="animation-delay: 0;"
+					>
+						<a href="/#about">About</a>
+					</li>
+					<li
+						class={scrollDirection.vertical === 'down'
+							? 'fade-enter-done-top'
+							: 'fade-enter-proccess'}
+						style="animation-delay: 100ms;"
+					>
+						<a href="/#jobs">Experience</a>
+					</li>
+					<li
+						class={scrollDirection.vertical === 'down'
+							? 'fade-enter-done-top'
+							: 'fade-enter-proccess'}
+						style="animation-delay: 200ms;"
+					>
+						<a href="/#projects">Work</a>
+					</li>
+					<li
+						class={scrollDirection.vertical === 'down'
+							? 'fade-enter-done-top'
+							: 'fade-enter-proccess'}
+						style="animation-delay: 300ms;"
+					>
+						<a href="/#contact">Contact</a>
+					</li>
+				</ol>
+
+				<div
+					class="nevbar_resume_wrpper {scrollDirection.vertical === 'down'
+						? 'fade-enter-done-top'
+						: 'fade-enter-proccess'}"
+					style="animation-delay: 400ms;"
 				>
+					<a class="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer"
+						>Resume</a
+					>
+				</div>
 			</div>
-		</div>
+		{/if}
 		<div class="navbar_menu_responsive">
 			<div>
 				<button

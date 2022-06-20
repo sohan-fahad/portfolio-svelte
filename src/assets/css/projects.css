@@ -14,6 +14,7 @@
     white-space: nowrap;
     font-family: 'Calibre', sans-serif;
     font-weight: 500;
+    visibility: hidden;
 }
 
 .projects_wrapper .numbered-heading::before {
@@ -52,6 +53,8 @@
     grid-template-columns: repeat(12, 1fr);
     -webkit-box-align: center;
     align-items: center;
+    visibility: hidden;
+
 }
 
 .featured__projects .project:not(last-of-type) {
@@ -61,11 +64,13 @@
 .featured__projects .project:nth-of-type(2n + 1) .project-content {
     grid-column: 7 / -1;
     text-align: right;
+
 }
 
 .featured__projects .project .project-content {
     position: relative;
     grid-area: 1 / 1 / -1 / 7;
+
 }
 
 .featured__projects .project .project-overline {
@@ -294,6 +299,20 @@ img:not([alt]) {
     transition: opacity 0.25s linear;
     will-change: opacity;
     opacity: 0;
+}
+
+.fade-enter-job {
+    animation: fadedown-enter-about 1s forwards ease-out;
+}
+
+@keyframes fadedown-enter-job {
+    from {
+        transform: translateY(100px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
 }
 
 @media screen and (max-width: 1080px) {

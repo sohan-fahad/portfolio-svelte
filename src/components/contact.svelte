@@ -1,16 +1,40 @@
-<section id="contact" class="contact_wrapper">
-	<h2 class="numbered-heading">What’s Next?</h2>
-	<h2 class="title">Get In Touch</h2>
-	<p>
-		Although I’m not currently looking for any new opportunities, my inbox is always open. Whether
-		you have a question or just want to say hi, I’ll try my best to get back to you!
-	</p>
-	<a class="email-link" href="mailto:brittany.chiang@gmail.com" target="_blank">Say Hello</a>
+<script lang="ts">
+	import { inview } from 'svelte-inview';
+	import type { ObserverEventDetails, ScrollDirection, Options } from 'svelte-inview';
+
+	let isInView: boolean;
+	let scrollDirection: ScrollDirection;
+	let options: Options = {
+		rootMargin: '-200px',
+		unobserveOnEnter: true
+	};
+
+	const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => {
+		isInView = detail.inView;
+		scrollDirection = detail.scrollDirection;
+		console.log(scrollDirection);
+	};
+</script>
+
+<section id="contact" class="contact_wrapper" use:inview={options} on:change={handleChange}>
+	{#if isInView}
+		<div
+			class={scrollDirection.vertical === 'up' ? 'fade-enter-done-botton' : 'fade-enter-proccess'}
+			style="animation-duration: 0.5s;"
+		>
+			<h2 class="numbered-heading">What’s Next?</h2>
+			<h2 class="title">Get In Touch</h2>
+			<p>
+				Although I’m not currently looking for any new opportunities, my inbox is always open.
+				Whether you have a question or just want to say hi, I’ll try my best to get back to you!
+			</p>
+			<a class="email-link" href="mailto:brittany.chiang@gmail.com" target="_blank">Say Hello</a>
+		</div>
+	{/if}
 </section>
 
 <style>
 	.contact_wrapper {
-		visibility: visible;
 		opacity: 1;
 		transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 		transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s,
@@ -18,6 +42,7 @@
 		max-width: 600px;
 		margin: 0px auto 100px;
 		text-align: center;
+		/* visibility: hidden; */
 	}
 
 	.contact_wrapper .numbered-heading {

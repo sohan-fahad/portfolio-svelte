@@ -14,10 +14,10 @@
     position: relative;
     margin: 10px 0px 40px;
     width: 100%;
-    font-size: clamp(26px, 5vw, var(--fz-heading));
-    font-weight: 500;
-    font-family: 'Calibre', sans-serif;
+    font-size: clamp(26px,5vw,var(--fz-heading));
     white-space: nowrap;
+    font-family: "Calibre", sans-serif;
+
 }
 
 .about-wrapper .numbered-heading::before {
@@ -47,7 +47,10 @@
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 50px;
+   
 }
+
+
 
 .about_info p {
     margin: 0 0 15px;
@@ -55,6 +58,7 @@
     color: var(--slate);
     font-size: 20px;
 }
+
 
 .about_info p>a {
     display: inline-block;

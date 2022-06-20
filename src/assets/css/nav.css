@@ -101,9 +101,12 @@
     position: relative;
     counter-increment: item 1;
     font-size: var(--fz-xs);
+    transform: translateY(-200px)
 }
 
-.navbar_menu_wr ol li a {
+
+
+.navbar_menu_wr li a {
     padding: 10px;
 }
 
@@ -133,6 +136,7 @@
     transition: var(--transition);
     margin-left: 15px;
     font-size: var(--fz-xs);
+    transform: translateY(-200px)
 }
 
 .nevbar_resume_wrpper:hover,
@@ -189,6 +193,16 @@
     pointer-events: auto !important;
     user-select: auto !important;
 }
+
+
+
+/* .fadedown-enter-done {
+    transform: translateY(0px);
+    transition-duration: 0.5s;
+} */
+
+
+
 
 @media screen and (max-width: 768px) {
     .navbar_menu_wr {

@@ -10,3 +10,4 @@ declare namespace App {
 }
 
 declare module "svelte-reveal"
+declare module "wowjs"

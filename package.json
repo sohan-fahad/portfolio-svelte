@@ -36,7 +36,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"animate.css": "^4.1.1",
 		"node-sass": "^7.0.1",
-		"svelte-scrollto": "^0.2.0"
+		"svelte-inview": "^3.0.1",
+		"svelte-scrollto": "^0.2.0",
+		"wowjs": "^1.1.3"
 	}
 }

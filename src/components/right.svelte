@@ -1,8 +1,22 @@
-<script>
+<script lang="ts">
+	import { inview } from 'svelte-inview';
+	import type { ObserverEventDetails, ScrollDirection, Options } from 'svelte-inview';
+
+	let isInView: boolean;
+	let scrollDirection: ScrollDirection;
+	const options: Options = {
+		rootMargin: '-20px',
+		unobserveOnEnter: true
+	};
+
+	const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => {
+		isInView = detail.inView;
+		scrollDirection = detail.scrollDirection.vertical;
+	};
 </script>
 
-<div class="right-side-wrapper">
-	<div class="email-wrapper">
+<div class="right-side-wrapper" use:inview={options} on:change={handleChange}>
+	<div class:email-wrapper={scrollDirection === 'down'}>
 		<a href="mailto:brittany.chiang@gmail.com">brittany.chiang@gmail.com</a>
 	</div>
 </div>
@@ -24,6 +38,7 @@
 		-webkit-box-align: center;
 		align-items: center;
 		position: relative;
+		animation: fadedown-enter 1.5s forwards ease-out;
 	}
 
 	.email-wrapper a {
@@ -55,6 +70,16 @@
 		height: 90px;
 		margin: 0px auto;
 		background-color: var(--light-slate);
+	}
+
+	@keyframes fadedown-enter {
+		from {
+			transform: translateX(200px);
+		}
+
+		to {
+			transform: translateX(0);
+		}
 	}
 
 	@media screen and (max-width: 1080px) {

@@ -17,20 +17,22 @@
 	};
 </script>
 
-<Nav {handlActive} {active} />
+<div id="root_wrapper">
+	<Nav {handlActive} {active} />
 
-<div class={active ? 'blur' : ''}>
-	<LeftSide />
-	<RightSide />
-	<main class="mx-auto w-full fill-width">
-		<Hero />
-		<About />
-		<Job />
-		<Projects />
-		<AllProject />
-	</main>
-	<Contact />
-	<Footer />
+	<div class={active ? 'blur' : ''}>
+		<LeftSide />
+		<RightSide />
+		<main class="mx-auto w-full fill-width">
+			<Hero />
+			<About />
+			<Job />
+			<Projects />
+			<AllProject />
+		</main>
+		<Contact />
+		<Footer />
+	</div>
 </div>
 
 <style>
